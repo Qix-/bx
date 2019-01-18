@@ -276,7 +276,7 @@ namespace bx
 	int32_t read(ReaderI* _reader, Ty& _value, Error* _err)
 	{
 		BX_ERROR_SCOPE(_err);
-		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>() );
+		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>(), "type is not trivially copyable");
 		return _reader->read(&_value, sizeof(Ty), _err);
 	}
 
@@ -284,7 +284,7 @@ namespace bx
 	int32_t readHE(ReaderI* _reader, Ty& _value, bool _fromLittleEndian, Error* _err)
 	{
 		BX_ERROR_SCOPE(_err);
-		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>() );
+		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>(), "type is not trivially copyable");
 		Ty value;
 		int32_t result = _reader->read(&value, sizeof(Ty), _err);
 		_value = toHostEndian(value, _fromLittleEndian);
@@ -332,7 +332,7 @@ namespace bx
 	int32_t write(WriterI* _writer, const Ty& _value, Error* _err)
 	{
 		BX_ERROR_SCOPE(_err);
-		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>() );
+		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>(), "type is not trivially copyable");
 		return _writer->write(&_value, sizeof(Ty), _err);
 	}
 
@@ -340,7 +340,7 @@ namespace bx
 	int32_t writeLE(WriterI* _writer, const Ty& _value, Error* _err)
 	{
 		BX_ERROR_SCOPE(_err);
-		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>() );
+		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>(), "type is not trivially copyable");
 		Ty value = toLittleEndian(_value);
 		int32_t result = _writer->write(&value, sizeof(Ty), _err);
 		return result;
@@ -350,7 +350,7 @@ namespace bx
 	int32_t writeBE(WriterI* _writer, const Ty& _value, Error* _err)
 	{
 		BX_ERROR_SCOPE(_err);
-		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>() );
+		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>(), "type is not trivially copyable");
 		Ty value = toBigEndian(_value);
 		int32_t result = _writer->write(&value, sizeof(Ty), _err);
 		return result;
@@ -395,7 +395,7 @@ namespace bx
 	int32_t peek(ReaderSeekerI* _reader, Ty& _value, Error* _err)
 	{
 		BX_ERROR_SCOPE(_err);
-		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>() );
+		BX_STATIC_ASSERT(isTriviallyCopyable<Ty>(), "type is not trivially copyable");
 		return peek(_reader, &_value, sizeof(Ty), _err);
 	}
 
